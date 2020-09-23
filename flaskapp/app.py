@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect
-from flask_mysqldb import MySQL
 import yaml
+from flask import Flask, redirect, render_template, request
+from flask_mysqldb import MySQL
 
 """
 NOTE: Must 'pip install' following modules
