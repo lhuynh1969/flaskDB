@@ -5,3 +5,4 @@ lib
 pythonFlaskMySQL.md
 *.pyc
 .vscode
+__pycache__
