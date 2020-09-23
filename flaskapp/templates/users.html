@@ -1,0 +1,15 @@
+<h1>Current Users</h1>
+<form method="get" action="/">
+    <table border=1>
+        {% for user in userDetails %}
+            <tr>
+                <td> {{user[0]}} </td>
+                <td> {{user[1]}} </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <input type="submit" value="Enter New User">
+</form>
+
+
