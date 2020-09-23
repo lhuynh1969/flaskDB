@@ -1,7 +1,7 @@
 db.yaml
-.pyc
 flaskDB
 bin
 lib
 pythonFlaskMySQL.md
 *.pyc
+.vscode
