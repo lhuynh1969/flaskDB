@@ -39,11 +39,14 @@ def index():
         userDetails = request.form
         name = userDetails['name']
         email = userDetails['email']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)", (name, email))
-        mysql.connection.commit()
-        cur.close()
-        return redirect('/users')
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)", (name, email))
+            mysql.connection.commit()
+            cur.close()
+            return redirect('/users')
+        except:
+            print("Duplicate email address.")
     # File 'index.html' is located inside 'flaskapp/templates'
     return render_template('index.html')
 
