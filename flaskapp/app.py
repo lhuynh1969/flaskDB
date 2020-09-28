@@ -1,6 +1,9 @@
+import os
+
 import yaml
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from flask_mysqldb import MySQL
+#from flask_sqlalchemy import SQLAlchemy
 
 """
 NOTE: Must 'pip install' following modules
@@ -16,6 +19,8 @@ Created MySQL database through command line:
   );
 """
 
+#basedir = os.path.abspath(os.path.dirname(__file__))
+
 # Create Flask instance 'app'
 app = Flask(__name__)
 
@@ -23,12 +28,20 @@ app = Flask(__name__)
 # YAML file contains information. NOTE: only for learning since passwords
 #   cannot be placed into files.
 db = yaml.load(open('db.yaml'))
+#
+# FLASK_MYSQLDB
 app.config['MYSQL_HOST'] = db['mysql_host']
 app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 
 mysql = MySQL(app)
+#
+# FLASK_SQLALCHEMY
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllit:///' + os.path.join(basedir, 'data.sqlite')
+#app.config['SQLALCHEMY_TRACK_MODIFICAITONS'] = False
+#mysql = SQLAlchemy(app)
+
 
 
 @app.route('/index', methods=['GET', 'POST'])
