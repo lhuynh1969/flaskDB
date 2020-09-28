@@ -35,12 +35,12 @@ app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 
-mysql = MySQL(app)
+mysqldb = MySQL(app)
 #
 # FLASK_SQLALCHEMY
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllit:///' + os.path.join(basedir, 'data.sqlite')
 #app.config['SQLALCHEMY_TRACK_MODIFICAITONS'] = False
-#mysql = SQLAlchemy(app)
+#mysqldb = SQLAlchemy(app)
 
 
 
@@ -53,9 +53,9 @@ def index():
         name = userDetails['name']
         email = userDetails['email']
         try:
-            cur = mysql.connection.cursor()
+            cur = mysqldb.connection.cursor()
             cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)", (name, email))
-            mysql.connection.commit()
+            mysqldb.connection.commit()
             cur.close()
             return redirect('/users')
         except:
@@ -65,7 +65,7 @@ def index():
 
 @app.route('/users')
 def users():
-    cur = mysql.connection.cursor()
+    cur = mysqldb.connection.cursor()
     resultValue = cur.execute("SELECT * FROM users")
     if resultValue > 0:
         userDetails = cur.fetchall()
